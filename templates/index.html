@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Image Caption Generator</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<h1>AI Image Caption Generator</h1>
+
+<input type="file" id="imageInput">
+<button onclick="uploadImage()">Generate Caption</button>
+
+<h2 id="result"></h2>
+
+<script>
+
+async function uploadImage(){
+
+    const fileInput = document.getElementById("imageInput")
+    const file = fileInput.files[0]
+
+    const formData = new FormData()
+    formData.append("file", file)
+
+    const response = await fetch("/caption",{
+        method:"POST",
+        body:formData
+    })
+
+    const data = await response.json()
+
+    document.getElementById("result").innerText = data.caption
+}
+
+</script>
+
+</body>
+</html>
