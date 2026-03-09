@@ -33,3 +33,7 @@ async def generate_caption(file: UploadFile = File(...)):
     caption = processor.decode(out[0], skip_special_tokens=True)
 
     return {"caption": caption}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
